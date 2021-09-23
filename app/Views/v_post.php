@@ -2,7 +2,7 @@
     <div class="text-center">          
         <h1>Ini Halaman Posts</h1> <br>
         <h2>All Posts</h2>
-    </div>
+    </div> 
 
     <div class="row justify-content-center">
         <div class="col-md-6">
