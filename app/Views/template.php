@@ -27,11 +27,9 @@
   <link rel="stylesheet" href="/assets/adminlte/plugins/summernote/summernote-bs4.min.css">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
-
     <?= $this->renderSection('content'); ?>
 
-
+    
     <!-- jQuery -->
     <script src="/assets/adminlte/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
