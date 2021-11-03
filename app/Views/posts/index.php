@@ -18,10 +18,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
+        <a href="/" class="nav-link">Home</a>
       </li>
     </ul>
 
@@ -161,7 +158,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="/assets/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="/assets/adminlte/dist/img/rqs.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">Maghviraturreimadhiney</a>
@@ -230,23 +227,34 @@
 
     <!-- Main Content -->
     <section class="content">
+
+      <?php if (session()->getFlashdata('pesan')) : ?>
+        <div class="alert alert-success" role="alert">
+          <?= session()->getFlashdata('pesan'); ?>
+        </div>
+      <?php endif; ?>
+      <?php if (session()->getFlashdata('pesan1')) : ?>
+        <div class="alert alert-danger" role="alert">
+          <?= session()->getFlashdata('pesan1'); ?>
+        </div>
+      <?php endif; ?>
+
       <div class="container-fluid">
         <a href="/admin/posts/create" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Data</a>
         <div class="card mt-3">
           <div class="card-header">
             Daftar Postingan
           </div>
-          <div class="card-body">
           <div class="table-responsive">
             <table class="table table-striped text-center">
               <thead>
                 <tr>
                   <th scope="col">No.</h>
                   <th scope="col">Judul</h>
-                  <th scope="col">slug</h>
-                  <th scope="col">author</h>
-                  <th scope="col">kategori</h>
-                  <th scope="col">action</h>
+                  <th scope="col">Slug</h>
+                  <th scope="col">Author</h>
+                  <th scope="col">Kategori</h>
+                  <th scope="col">Action</h>
                 </tr>
               </thead>
               <tbody>
@@ -258,8 +266,16 @@
                   <td><?= $post['author'] ?></td>
                   <td><?= $post['kategori'] ?></td>
                   <td>
-                    <a href="/admin/posts/edit/<?= $post['slug']; ?>" class="btn btn-sm btn-warning me-1"><i class="fas fa-edit"></i> Edit</a>
-                    <a href="/admin/posts/delete/<?= $post['slug']; ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</a>
+                    <a href="posts/edit/<?= $post['post_id']; ?>" class="btn btn-sm btn-warning me-1"><i class="fas fa-edit"></i> Edit</a>
+
+                    <form action="/admin/posts/<?= $post['post_id']; ?>" method="post" class="d-inline">
+                      <? csrf_field(); ?>
+                      <input type="hidden" name="_method" value="DELETE">
+                      <button type="submit" class="btn btn-sm btn-danger me-1" onclick="return confirm('Apakah anda ingin menghapus?');">
+                        <i class="fas fa-trash"></i> Delete
+                      </button>
+                    </form>
+                    
                   </td>
                 </tr>
                 <?php endforeach; ?>
@@ -268,7 +284,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

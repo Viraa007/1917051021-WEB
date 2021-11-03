@@ -229,15 +229,17 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                Form Tambah Data
+                Form Edit Data
             </div>
             <div class="card-body">
-              <form action="/admin/posts/store" method="POST">
+              <form action="/admin/posts/update/<?= $post['post_id']; ?>" method="POST">
+                    <?= csrf_field(); ?>
+                    <input type="hidden" name="slug" value="<?= $post['slug']; ?>">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="judul">Judul Postingan</label>
-                                <input type="text" class="form-control <?= ($validation->hasError('judul')) ? 'is-invalid' : ''; ?>" id="judul" name="judul" value="<?= old('judul'); ?>">
+                                <input type="text" class="form-control <?= ($validation->hasError('judul')) ? 'is-invalid' : ''; ?>" id="judul" name="judul" value="<?= (old('judul')) ? old('judul') : $post['judul']; ?>">
                                 <?php if ($validation->hasError('judul')) : ?>
                                   <div class="invalid-feedback">
                                     <?= $validation->getError("judul"); ?>
@@ -246,7 +248,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="slug">Slug</label>
-                                <input type="text" class="form-control <?= ($validation->hasError('slug')) ? 'is-invalid' : ''; ?>" id="slug" name="slug" value="<?= old('slug'); ?>">
+                                <input type="text" class="form-control <?= ($validation->hasError('slug')) ? 'is-invalid' : ''; ?>" id="slug" name="slug" value="<?= (old('slug')) ? old('slug') : $post['slug']; ?>">
                                 <?php if ($validation->hasError('slug')) : ?>
                                   <div class="invalid-feedback">
                                     <?= $validation->getError("slug"); ?>
@@ -255,7 +257,7 @@
                               </div>
                             <div class="form-group">
                                 <label for="kategori">Kategori Postingan</label>
-                                <input type="text" class="form-control <?= ($validation->hasError('kategori')) ? 'is-invalid' : ''; ?>" id="kategori" name="kategori" value="<?= old('kategori'); ?>">
+                                <input type="text" class="form-control <?= ($validation->hasError('kategori')) ? 'is-invalid' : ''; ?>" id="kategori" name="kategori" value="<?= (old('kategori')) ? old('kategori') : $post['kategori']; ?>">
                                 <?php if ($validation->hasError('kategori')) : ?>
                                   <div class="invalid-feedback">
                                     <?= $validation->getError("kategori"); ?>
@@ -264,7 +266,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="author">Author</label>
-                                <input type="text" class="form-control <?= ($validation->hasError('author')) ? 'is-invalid' : ''; ?>" id="author" name="author" value="<?= old('author'); ?>">
+                                <input type="text" class="form-control <?= ($validation->hasError('author')) ? 'is-invalid' : ''; ?>" id="author" name="author" value="<?= (old('author')) ? old('author') : $post['author']; ?>">
                                 <?php if ($validation->hasError('author')) : ?>
                                   <div class="invalid-feedback">
                                     <?= $validation->getError("author"); ?>
@@ -276,7 +278,7 @@
                             </button>
                         </div>
                         <div class="col-md-8">
-                            <label for="deskripsi"> Deskripsi Postingan</label>
+                            <label for="deskripsi">Deskripsi Postingan</label>
                             <br>
                             <textarea name="deskripsi" id="deskripsi" class="form-control <?= ($validation->hasError('deskripsi')) ? 'is-invalid' : ''; ?>">
                             <?= old('deskripsi'); ?>
